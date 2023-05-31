@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %} Home Page 
+{% endblock title%}
+{% block content %}
+
+
+<br>
+<div class="jumbotron" style="background-color: white; margin-top: 30px;">
+    <center><h1 class="display-4" style="color:#218B82;margin-bottom: 10px;" ><b>Welcome {{user.username.title}}</b></h1></center>
+   
+    <section class="hero1" style="background-color:#218B82">
+        <div class="hero-content">
+            
+            <h1 class="hero-title">EduForum</h1>
+            <center> <p class="hero-paragraph">
+               
+                We provide you a space where you can learn,grow and connect with your fellowmates to enable productivity, growth, and discovery.
+                </p> 
+            </center>
+            <center>
+           
+                {% if user.is_authenticated %}
+                
+      {% else %}
+                <a href="/login" class="btn btn-businesses" style="background-color:#e9c63f; color:black">Sign up</a>
+                {% endif %}
+                
+         
+        
+        </center>
+        </div>
+    </section>
+
+
+    {% if user.is_authenticated %}
+    
+    {% else %}
+   
+    <section class="for-developers" id="section1" style="background-color: white;">
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">For Students, by Students
+                </h2>
+                <div class="section-line" style="background-color: #e9c63f;"></div>
+                <p class="section-description">EduForum is an <a href="#" style="color: #e9c63f;">intra college community platform</a> for student to student as well as student to mentor interaction. We help you get answers to your toughest questions, share knowledge with your fellowmates by answering to their queries, and find the optimal solution to your question based on the relevance of answers.
+                </p>
+            </div>
+            <div class="options">
+                <div class="option">
+                    <div class="option-icon">
+                        <img src="https://cdn.sstatic.net/Img/home/public-qa.svg?v=d82acaa7df9f" alt="Public Q & A">
+                    </div>
+                    <div class="option-title">
+                         Q&A
+                    </div>
+                    <div class="option-description">
+                        Get answers to all your questions and answer back by sharing your knowledge with others.
+                        <a href="/login">Sign up</a> for an account.
+                    </div>
+                    <div class="option-button">
+                        <a href="/questions/new" class="option-link btn btn-dark-blue">
+                            Browse questions
+                        </a>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="option-icon">
+                        <img src="https://cdn.sstatic.net/Img/home/private-qa.svg?v=2c1de180b6d7" alt="Private Q & A">
+                    </div>
+                    <div class="option-title">
+                       Post your solutions
+                    </div>
+                    <div class="option-description">
+                        Post images of the solutions/questions or diagrams if you cannot type them(in case of lengthy answers)
+                    </div>
+                    <div class="option-button">
+                        <a href="/login" class="option-link btn btn-dark-blue">
+                            Post
+                        </a>
+                    </div>
+                </div>
+                <div class="option">
+                    <div class="option-icon">
+                        <img src="https://cdn.sstatic.net/Img/home/jobs.svg?v=931d6c0863ee" alt="Browse jobs">
+                    </div>
+                    <div class="option-title">
+                        Ask Questions
+                    </div>
+                    <div class="option-description">
+                        Login or register to ask your questions!
+     
+     
+                    </div>
+                    <div class="option-button">
+                        <a href="/login" class="option-link btn btn-dark-blue">
+                            Ask
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+     <section class="for-businesses">
+        <div class="container">
+            <div class="section-head">
+                <h2 class="section-title">Mission</h2>
+                <div class="section-line" style="background-color: #e9c63f;"></div>
+                <p class="section-description">Our mission is to help students to learn and explore new things.This means we help you find the optimal solution for your questions among all the solutions given,based on the correctness of the solution.</p>
+            </div>
+    
+    
+    
+        </div>
+    </section>
+    
+    {% endif %}
+    {% comment %} <div class="jumbotron">
+        <h1 class="display-4">Welcome, {{user.first_name.title|default:'Guest '}}</h1>
+        <p class="lead">
+            <center><b style="font-size:30px">Registered successfully</b></center>
+            
+        </p> {% endcomment %}
+        {% comment %} <p class="lead"> {% endcomment %}
+     
+            
+        </p>
+        
+    </div>
+
+{% endblock content %}

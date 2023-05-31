@@ -1,0 +1,197 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+
+   <!-- Required meta tags -->
+    {% comment %} <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Font awesome icons -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock %} </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}">
+</head>
+<body>
+
+    <header style="border-top: 3px solid #218B82">
+        <div class="nav-container" >
+          <nav>
+              <div class="nav-brand">
+                  <div class="hamburger-menu-container">
+        
+                      <div class="hamburger-menu">
+                          <div class="line"></div>
+                          <div class="line"></div>
+                          <div class="line"></div>
+                      </div>
+                      <div class="nav-dropdown-menu">
+                          <ul class="nav-ul">
+                              <li class="nav-item">
+                                  
+                                  <a href="/" class="nav-link"><b>EduForum</b></a>
+                              </li>
+                              {% if user.is_authenticated %}
+                              <li class="nav-item"><a href="/questions/new" class="nav-link">Ask</a></li>
+                              <li class="nav-item"><a href="/questions" class="nav-link">View Discussion</a></li>
+                              {% comment %} <li class="nav-item"><a href="#" class="nav-link">Post</a></li> {% endcomment %}
+                              {% endif %}
+                          </ul>
+                          
+                      </div>
+                  </div>
+        
+                  <a href="/" class="nav-icon">
+                      <!-- <i class="fa-solid fa-book-open-reader" ></i> -->
+                      <div class="nav-icon-text">Edu <span class="nav-bold-text">Forum</span>
+                      </div>
+                  </a>
+              </div>
+              <div class="nav-base-links">
+                  <ul>
+                    <div class="hero-options">
+                        {% if user.is_authenticated %}
+                        <li><a href="/questions/new">Ask Question</a></li>
+                        {% else %}
+                        <li><a href="#section1">About</a></li>
+                        <li><a href="#section2">Contact Us</a></li>
+                         {% endif %}
+                    </div> 
+                     
+                      {% if user.is_authenticated %}
+                     <li> <a href="{% url 'profile' %}" >Profile</a></li>
+                      <li><a href="{% url 'logout' %}" >Logout</a></li>
+                    {% else %}
+                     <li> <a href="/login" >Sign in</a><li>
+                    {% endif %}
+                  </ul>
+              </div>
+
+              {% comment %} {% if user.is_authenticated %} {% endcomment %}
+              {% if request.path == "/questions/" %}
+              <div class="nav-search">
+                  <div class="search-container">
+                      <i class="fas fa-search"></i>
+                      <form action="" method="GET">
+                        <input type="text" id="" name="search-area" placeholder="Search...">
+                        <button type="submit" style="margin-left: 340px; border-radius: 25px; border: none; padding: 8px;">Search</button>
+                    </form>
+                  </div>
+                  <div class="search-hints">
+                      <div class="search-arrow-up"></div>
+                      <div class="search-hint-body">
+                          <div class="hints-grid-column">
+                              <div class="hint-text"><span>[tag] </span> search within a tag</div>
+                              <div class="hint-text"><span>user:1234 </span>  search by author</div>
+                              <div class="hint-text"><span>"words here"</span> exact phrase </div>
+                          </div>
+                          <div class="hints-grid-column">
+                              <div class="hint-text"><span>answers:0</span> unanswered questions</div>
+                              <div class="hint-text"><span> score:3  </span> posts with a 3+ score</div>
+                              <div class="hint-text"><span>isaccepted:yes </span> search within status</div>
+                          </div>
+                      </div>
+                      <div class="search-hint-footer">
+                          <a href="#" class="btn">Ask a question</a>
+                          <a href="#" class="search-help">Search help</a>
+                      </div>
+                  </div>
+        
+              </div>
+              <div class="nav-right-buttons">
+                  <div class="search-btn">
+                      <i class="fas fa-search"></i>
+                  </div>
+              </div>
+              {% else %}
+              {% endif %}
+          </nav>
+        </div>
+        </header>
+
+        {% if messages %}
+        <div class="alert alert-dismissible" role="alert">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% endif %}
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</div> 
+ 
+<footer class="footer" id="section2" style="margin-bottom: 0%;">
+    <div class="container">
+    <div class="footer-content">
+    <div class="footer-nav">
+        <div class="footer-nav-col">
+            <div class="footer-links-title"><a href="/">EduForum</a></div>
+            <ul class="footer-links">
+                <li class="footer-link-item"><a href="https://drive.google.com/file/d/1pTKsDL_kPvZLkCnevkpGR35umfaEx6K7/view?usp=sharing " class="footer-link">Documentation</a></li> 
+                <li class="footer-link-item"><a href="https://docs.google.com/forms/d/1HEVm7BHwJWDMwxISHsYoO4IhB4kW9VGy2LU-S-KMkfE/edit " class="footer-link">Survey form</a></li> 
+                <li class="footer-link-item"><a href="https://docs.google.com/forms/d/1Jmt0GELk4C3G_cM7smpflK_4QQ1bUztVj-5QC-x3LSI/edit" class="footer-link">Suggestion form</a></li> 
+            </ul>
+        </div>
+        <div class="footer-nav-col">
+            <div class="footer-links-title">Team Members</div>
+            <ul class="footer-links">
+                <li class="footer-link-item"><a href="https://www.linkedin.com/in/keerti-naikwad/" class="footer-link">Keerti.K.N</a></li>
+                <li class="footer-link-item"><a href="https://www.linkedin.com/in/madhumitanaik/" class="footer-link">Madhumita.K.N</a></li>
+                <li class="footer-link-item"><a href="https://www.linkedin.com/in/manu-hegde-3081a11b4/" class="footer-link">Manu.H</a></li>
+                <li class="footer-link-item"><a href="https://www.linkedin.com/in/sourabh-potdar/" class="footer-link">Sourabh</a></li>
+            </ul>
+        </div>
+        <div class="footer-nav-col">
+            <div class="footer-links-title">Guide</div>
+            <ul class="footer-links">
+                <li class="footer-link-item"><a href="https://drive.google.com/file/d/19KeO0hvCjD4oDgf04-LYyWn6E6WjpzuM/view?usp=sharing" class="footer-link">Prof.Ranganath.G.Y</a></li>
+                {% comment %} <li class="footer-link-item"><a href="#" class="footer-link">Press</a></li>
+                <li class="footer-link-item"><a href="#" class="footer-link">Work Here</a></li>
+                <li class="footer-link-item"><a href="#" class="footer-link">Legal</a></li>
+                <li class="footer-link-item"><a href="#" class="footer-link">Privacy Policy</a></li>
+                <li class="footer-link-item"><a href="#" class="footer-link">Contact Us</a></li> {% endcomment %}
+            </ul>
+        </div>
+        <div class="footer-nav-col">
+          <div class="footer-links-title">College</div>
+          <ul class="footer-links">
+              <li class="footer-link-item">
+                  <a href="//sdmcet.ac.in/" class="footer-link">SDMCET</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-nav-col">
+            <div class="footer-links-title">Contact us</div>
+            <ul class="footer-links">
+                <li class="footer-link-item">sdmeduforum@gmail.com</li>
+                <li class="footer-link-item">Dharwad</li>
+                <li class="footer-link-item">Karnataka,India</li>
+            </ul>
+        </div>
+        
+ 
+      
+    </div>
+    </div>
+    
+    </div>
+    </footer>
+
+<!-- <script src="assets/js/main.js"></script> -->
+<script src="{% static 'main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+</body>
+</html>
